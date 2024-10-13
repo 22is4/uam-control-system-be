@@ -29,7 +29,7 @@ public class DroneService {
         DroneInstance droneInstance = getDroneById(instanceId);
         if (droneInstance != null) {
             // 미션 아이템을 드론에 할당
-            // 필요한 로직 추가 (예: 미션 수행 상태 업데이트)
+//            droneInstance.setMissionItems(missionItems);
             System.out.println("Assigning mission to drone: " + instanceId);
             // 미션 수행 로직 추가 필요
         }
@@ -41,17 +41,17 @@ public class DroneService {
     }
 
     // 특정 드론 인스턴스 위치 정보를 반환하는 메서드
-    public DroneInstance getDroneById(int id) {
+    public DroneInstance getDroneById(int instanceId) {
         return droneInstances.stream()
-                .filter(drone -> drone.getId() == id)
+                .filter(drone -> drone.getId() == instanceId)
                 .findFirst()
                 .orElse(null);
     }
 
     // 드론 비행 정보 업데이트 메서드
-    public void updateDroneInfo(int id, DroneInstance updatedInfo) {
+    public void updateDroneInfo(int instanceId, DroneInstance updatedInfo) {
         droneInstances.stream()
-                .filter(drone -> drone.getId() == id)
+                .filter(drone -> drone.getId() == instanceId)
                 .findFirst()
                 .ifPresent(droneInstance -> {
                     droneInstance.setLatitude(updatedInfo.getLatitude());

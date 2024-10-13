@@ -35,7 +35,7 @@ public class DroneController {
         }
     }
 
-    // 드론 생성 API
+    // 명령 처리 API
     @PostMapping("/command")
     public ResponseEntity<String> executeCommand(@RequestBody Command command) {
         switch (command.getType()) {
@@ -55,8 +55,8 @@ public class DroneController {
 
     // 시뮬레이터로부터 드론 정보 업데이트 요청 처리
     @PostMapping("/update-drone/{id}")
-    public ResponseEntity<String> updateDroneInfo(@PathVariable int id, @RequestBody DroneInstance updatedInfo) {
-        droneService.updateDroneInfo(id, updatedInfo);
+    public ResponseEntity<String> updateDroneInfo(@PathVariable int instanceId, @RequestBody DroneInstance updatedInfo) {
+        droneService.updateDroneInfo(instanceId, updatedInfo);
         return ResponseEntity.ok("드론 정보 업데이트 완료");
     }
 }
