@@ -1,8 +1,10 @@
 package com.uam_control_system.service;
 
 import com.uam_control_system.model.DroneInstance;
-import com.uam_control_system.model.MissionItem;
+import com.uam_control_system.model.Command;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,29 +12,44 @@ import java.util.List;
 @Service
 public class DroneService {
     private final List<DroneInstance> droneInstances = new ArrayList<>();
+    private final RestTemplate restTemplate = new RestTemplate();
 
-    // 드론 인스턴스를 추가하는 메서드
-    public DroneInstance addDroneInstance(int instanceId, double latitude, double longitude) {
-        DroneInstance newDrone = new DroneInstance(instanceId, latitude, longitude, 0.0, "대기 중");
-        droneInstances.add(newDrone);
-        return newDrone;
+    // 시뮬레이터 URL
+    private final String simulatorUrl = "";
+
+    // 드론 생성 요청을 시뮬레이터에 전달하고 응답 받기
+    public DroneInstance createDroneInstance(DroneInstance droneInstance, CommandService commandService) {
+        // Command 객체 생성
+        Command command = new Command(0, droneInstance.getId(), droneInstance.getLatitude(), droneInstance.getLongitude());
+
+        // 시뮬레이터에 드론 생성 요청
+        ResponseEntity<DroneInstance> response = restTemplate.postForEntity("http://simulator-url/drone/create", command, DroneInstance.class);
+
+        // 응답 처리
+        if (response.getStatusCode().is2xxSuccessful()) {
+            // 응답에서 드론 인스턴스를 생성
+            DroneInstance createdDrone = response.getBody();
+            if (createdDrone != null) {
+                droneInstances.add(createdDrone);
+            }
+            return createdDrone;
+        }
+        return null;
     }
 
     // 드론 삭제 메서드
-    public void deleteDroneInstance(int instanceId) {
-        droneInstances.removeIf(drone -> drone.getId() == instanceId);
-    }
+    public boolean deleteDroneInstance(int instanceId, CommandService commandService) {
+        // Command 객체 생성
+        Command command = new Command(1, instanceId, 0, 0); // 위도와 경도는 필요 없으므로 0으로 설정
 
-    // 미션 수행 메서드
-    public void assignMission(int instanceId, List<MissionItem> missionItems) {
-        // 드론 인스턴스 찾기
-        DroneInstance droneInstance = getDroneById(instanceId);
-        if (droneInstance != null) {
-            // 미션 아이템을 드론에 할당
-//            droneInstance.setMissionItems(missionItems);
-            System.out.println("Assigning mission to drone: " + instanceId);
-            // 미션 수행 로직 추가 필요
+        // 시뮬레이터에 드론 삭제 요청
+        ResponseEntity<Void> response = restTemplate.postForEntity("http://simulator-url/drone/delete", command, Void.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            droneInstances.removeIf(drone -> drone.getId() == instanceId);
+            return true;
         }
+        return false;
     }
 
     // 모든 드론 인스턴스를 반환하는 메서드
