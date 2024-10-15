@@ -21,26 +21,26 @@ public class DroneController {
     }
 
     // 드론 생성
-    @PostMapping("/create")
-    public ResponseEntity<String> createDrone(@RequestBody DroneInstance droneInstance) {
-        DroneInstance newDrone = droneService.createDroneInstance(droneInstance, commandService);
-        if (newDrone != null) {
-            return ResponseEntity.ok("드론 생성 완료: " + newDrone.getId());
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 생성 실패");
-        }
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<String> createDrone(@RequestBody DroneInstance droneInstance) {
+//        DroneInstance newDrone = droneService.createDroneInstance(droneInstance, commandService);
+//        if (newDrone != null) {
+//            return ResponseEntity.ok("드론 생성 완료: " + newDrone.getId());
+//        } else {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 생성 실패");
+//        }
+//    }
 
     // 드론 삭제
-    @DeleteMapping("/delete/{instanceId}")
-    public ResponseEntity<String> deleteDrone(@PathVariable int instanceId) {
-        boolean success = droneService.deleteDroneInstance(instanceId, commandService);
-        if (success) {
-            return ResponseEntity.ok("드론 삭제 완료: " + instanceId);
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 삭제 실패");
-        }
-    }
+//    @DeleteMapping("/delete/{instanceId}")
+//    public ResponseEntity<String> deleteDrone(@PathVariable int instanceId) {
+//        boolean success = droneService.deleteDroneInstance(instanceId, commandService);
+//        if (success) {
+//            return ResponseEntity.ok("드론 삭제 완료: " + instanceId);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 삭제 실패");
+//        }
+//    }
 
     // 드론 정보 업데이트
     @PutMapping("/update/{instanceId}")
