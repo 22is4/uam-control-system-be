@@ -1,6 +1,7 @@
 package com.uam_control_system.controller;
 
 import com.uam_control_system.model.DroneInstance;
+import com.uam_control_system.model.Command;
 import com.uam_control_system.service.DroneService;
 import com.uam_control_system.service.CommandService;
 import org.springframework.http.HttpStatus;
@@ -20,33 +21,29 @@ public class DroneController {
         this.commandService = commandService;
     }
 
-    // 드론 생성
-//    @PostMapping("/create")
-//    public ResponseEntity<String> createDrone(@RequestBody DroneInstance droneInstance) {
-//        DroneInstance newDrone = droneService.createDroneInstance(droneInstance, commandService);
-//        if (newDrone != null) {
-//            return ResponseEntity.ok("드론 생성 완료: " + newDrone.getId());
-//        } else {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 생성 실패");
-//        }
-//    }
+    // 드론 생성 - CommandService를 통해 드론 생성 요청을 시뮬레이터로 보냄
+    @PostMapping("/create")
+    public ResponseEntity<String> createDrone(@RequestBody Command command) {
+        DroneInstance newDrone = commandService.createDrone(command);  // Command 객체를 통해 드론 생성
+        if (newDrone != null) {
+            return ResponseEntity.ok("드론 생성 완료: " + newDrone.getId());
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 생성 실패");
+        }
+    }
 
-    // 드론 삭제
-//    @DeleteMapping("/delete/{instanceId}")
-//    public ResponseEntity<String> deleteDrone(@PathVariable int instanceId) {
-//        boolean success = droneService.deleteDroneInstance(instanceId, commandService);
-//        if (success) {
-//            return ResponseEntity.ok("드론 삭제 완료: " + instanceId);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 삭제 실패");
-//        }
-//    }
-
-    // 드론 정보 업데이트
-    @PutMapping("/update/{instanceId}")
-    public ResponseEntity<String> updateDroneInfo(@PathVariable int instanceId, @RequestBody DroneInstance updatedInfo) {
-        droneService.updateDroneInfo(instanceId, updatedInfo);
-        return ResponseEntity.ok("드론 정보 업데이트 완료");
+    // 드론 삭제 - CommandService를 통해 드론 삭제 요청을 시뮬레이터로 보냄
+    @DeleteMapping("/delete/{instanceId}")
+    public ResponseEntity<String> deleteDrone(@PathVariable int instanceId) {
+        Command command = new Command();
+        command.setType(1);  // 삭제 명령
+        command.setInstanceId(instanceId);
+        boolean success = commandService.deleteDrone(command);  // Command 객체를 통해 드론 삭제
+        if (success) {
+            return ResponseEntity.ok("드론 삭제 완료: " + instanceId);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 삭제 실패");
+        }
     }
 
     // 모든 드론 인스턴스 조회

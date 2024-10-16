@@ -974,3 +974,8 @@ Original Stack Trace:
 2024-10-15T15:38:16.254+09:00  INFO 93100 --- [reactor-http-nio-6] c.u.controller.CommandController         : 드론 위치 업데이트 요청 처리: Coordinate(instanceId=null, latitude=33.33, longitude=33.33, altitude=33.33)
 2024-10-15T15:38:16.264+09:00  INFO 93100 --- [reactor-http-nio-6] c.u.service.CommandService               : 드론 위치 업데이트 명령 수신: Coordinate(instanceId=null, latitude=33.33, longitude=33.33, altitude=33.33)
 2024-10-15T15:38:16.264+09:00  INFO 93100 --- [reactor-http-nio-6] c.u.service.CommandService               : 드론 위치 업데이트 완료: Coordinate(instanceId=null, latitude=33.33, longitude=33.33, altitude=33.33)
+2024-10-15T15:57:59.094+09:00  INFO 93742 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 93742 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
+2024-10-15T15:57:59.096+09:00 DEBUG 93742 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-10-15T15:57:59.097+09:00  INFO 93742 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
+2024-10-15T15:57:59.843+09:00  INFO 93742 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-10-15T15:57:59.852+09:00  INFO 93742 --- [main] com.uam_control_system.UamServer         : Started UamServer in 0.995 seconds (process running for 1.183)

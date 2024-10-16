@@ -23,6 +23,12 @@ public class CommandService {
     // 드론 인스턴스를 관리하기 위한 Map
     private final Map<String, DroneInstance> droneInstances = new HashMap<>();
 
+    private final DroneService droneService;
+
+    public CommandService(DroneService droneService) {
+        this.droneService = droneService;
+    }
+
     // 드론 생성 명령 처리
     public DroneInstance createDrone(Command command) {
         logger.info("드론 생성 명령 수신: {}", command);
@@ -30,8 +36,11 @@ public class CommandService {
             // 시뮬레이터에 드론 생성 요청
             ResponseEntity<DroneInstance> response = restTemplate.postForEntity(simulatorUrl + "/create", command, DroneInstance.class);
             if (response.getStatusCode().is2xxSuccessful()) {
-                logger.info("드론 생성 성공: {}", response.getBody());
-                return response.getBody(); // 생성된 드론 반환
+                DroneInstance createdDrone = response.getBody(); // 생성된 드론 인스턴스
+                logger.info("드론 생성 성공: {}", createdDrone);
+                // 드론 생성 후 프론트엔드에 알림 전송
+                droneService.notifyDroneCreated(createdDrone); // 생성된 드론 전달
+                return createdDrone; // 생성된 드론 반환
             }
         }
         logger.error("드론 생성 실패");
@@ -46,6 +55,8 @@ public class CommandService {
             boolean success = response.getStatusCode().is2xxSuccessful();
             if (success) {
                 logger.info("드론 삭제 성공");
+                // 드론 삭제 후 프론트엔드에 알림 전송
+                droneService.notifyDroneDeleted(command.getInstanceId());
             } else {
                 logger.error("드론 삭제 실패");
             }
@@ -72,6 +83,7 @@ public class CommandService {
             droneInstance.setLatitude(coordinate.getLatitude());
             droneInstance.setLongitude(coordinate.getLongitude());
             droneInstance.setAltitude(coordinate.getAltitude());
+            droneInstance.setSpeed(coordinate.getSpeed());
             droneInstance.setStatus(coordinate.getStatus());
             logger.info("드론 위치 업데이트 완료: {}", droneInstance);
             return true;
