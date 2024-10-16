@@ -4,6 +4,9 @@ import com.uam_control_system.model.DroneInstance;
 import com.uam_control_system.model.Command;
 import com.uam_control_system.model.Coordinate;
 import com.uam_control_system.service.CommandService;
+import com.uam_control_system.service.DroneService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,40 +19,43 @@ import org.slf4j.LoggerFactory;
 public class CommandController {
     private static final Logger logger = LoggerFactory.getLogger(CommandController.class);
     private final CommandService commandService;
-    public CommandController(CommandService commandService) {
+    private final DroneService droneService;
+
+
+    @Autowired
+    public CommandController(CommandService commandService, @Lazy DroneService droneService) {
         this.commandService = commandService;
+        this.droneService = droneService;
     }
 
     // 드론 생성 요청 처리
     @PostMapping("/create")
     public ResponseEntity<String> createDrone(@RequestBody Command command) {
         logger.info("드론 생성 요청 처리: {}", command);
-        // 시뮬레이터로부터의 요청이므로 command 타입을 체크하지 않고 바로 처리
-        if (command.getType() == 0) {
-            DroneInstance createdDrone = commandService.createDrone(command);
-            if (createdDrone != null) {
-                return ResponseEntity.ok("드론 생성 완료: " + createdDrone.getId());
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 생성 실패");
-            }
+        DroneInstance createdDrone = commandService.createDrone(command);
+
+        if (createdDrone != null) {
+            // 드론 생성 후 프론트엔드에 알림 전송
+            droneService.createDrone(createdDrone);
+            return ResponseEntity.ok("드론 생성 완료"); // 성공 응답 반환
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 생성 실패"); // 실패 응답 반환
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 명령 타입");
     }
 
     // 드론 삭제 요청 처리
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<String> deleteDrone(@RequestBody Command command) {
         logger.info("드론 삭제 요청 처리: {}", command);
-        // 시뮬레이터로부터의 요청이므로 command 타입을 체크하지 않고 바로 처리
-        if (command.getType() == 1) {
-            boolean success = commandService.deleteDrone(command);
-            if (success) {
-                return ResponseEntity.ok("드론 삭제 완료");
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 삭제 실패");
-            }
+        DroneInstance removedDrone = commandService.deleteDrone(command);
+
+        if (removedDrone != null) {
+            // 드론 삭제 후 프론트엔드에 알림 전송
+            droneService.deleteDrone(command.getInstanceId());
+            return ResponseEntity.ok("드론 삭제 완료"); // 성공 응답 반환
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 삭제 실패"); // 실패 응답 반환
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘못된 명령 타입");
     }
 
     // 미션 수행 요청 처리
