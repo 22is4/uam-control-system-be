@@ -31,12 +31,12 @@ public class DroneService {
     }
 
     public void createDrone(DroneInstance droneInstance) {
-        sendToFrontend("droneCreated", droneInstance);
+        sendToFrontend("create", droneInstance);
     }
 
     // 프론트엔드로 드론 삭제 알림 전송
     public void deleteDrone(int instanceId) {
-        sendToFrontend("droneDeleted", instanceId);
+        sendToFrontend("delete", instanceId);
     }
 
     // 모든 드론 인스턴스를 반환하는 메서드

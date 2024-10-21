@@ -3,14 +3,17 @@ package com.uam_control_system.controller;
 import com.uam_control_system.model.DroneInstance;
 import com.uam_control_system.model.Command;
 import com.uam_control_system.model.Coordinate;
+import com.uam_control_system.model.MissionItem;
 import com.uam_control_system.service.CommandService;
 import com.uam_control_system.service.DroneService;
+import com.uam_control_system.service.DroneMissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,18 +23,24 @@ public class CommandController {
     private static final Logger logger = LoggerFactory.getLogger(CommandController.class);
     private final CommandService commandService;
     private final DroneService droneService;
+    private final DroneMissionService droneMissionService;
 
 
     @Autowired
-    public CommandController(CommandService commandService, @Lazy DroneService droneService) {
+    public CommandController(CommandService commandService, @Lazy DroneService droneService, DroneMissionService droneMissionService) {
         this.commandService = commandService;
         this.droneService = droneService;
+        this.droneMissionService = droneMissionService;
     }
 
     // 드론 생성 요청 처리
     @PostMapping("/create")
     public ResponseEntity<String> createDrone(@RequestBody Command command) {
         logger.info("드론 생성 요청 처리: {}", command);
+
+        // 출발지 저장
+        droneMissionService.saveStartLocation(command);
+
         DroneInstance createdDrone = commandService.createDrone(command);
 
         if (createdDrone != null) {
@@ -62,9 +71,19 @@ public class CommandController {
     @PostMapping("/mission")
     public ResponseEntity<String> executeMission(@RequestBody Command command) {
         logger.info("미션 수행 요청: {}", command);
+
         if (command.getType() == 2) {
+            List<MissionItem> missionItems = command.getMissionItems();
+
+            if (missionItems == null || missionItems.isEmpty()) {
+                logger.error("미션 아이템이 없습니다: {}", command);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("미션 아이템이 없습니다");
+            }
+
             boolean success = commandService.executeMission(command);
             if (success) {
+                // 도착지 저장
+                droneMissionService.saveEndLocation(command);
                 return ResponseEntity.ok("미션 수행 요청 완료");
             } else {
                 logger.error("미션 수행 실패: {}", command);
@@ -75,7 +94,7 @@ public class CommandController {
     }
 
     // 드론 위치 업데이트 요청 처리
-    @PostMapping("/coordinate/update")
+    @PostMapping("/update")
     public ResponseEntity<String> updateCoordinate(@RequestBody Coordinate coordinate) {
         logger.info("드론 위치 업데이트 요청 처리: {}", coordinate);
         boolean success = commandService.updateDroneStatus(coordinate);

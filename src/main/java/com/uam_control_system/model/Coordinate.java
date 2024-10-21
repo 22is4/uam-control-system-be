@@ -10,4 +10,9 @@ public class Coordinate {
     private double altitude; // 고도
     private double speed;
     private String status;
+
+    public Coordinate(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
