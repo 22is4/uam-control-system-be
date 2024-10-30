@@ -15,8 +15,11 @@ import java.util.Map;
 @Service
 public class DroneMissionService {
     private static final Logger logger = LoggerFactory.getLogger(DroneMissionService.class);
+    private final DroneService droneService;
     @Autowired
-    private DroneService droneService;
+    public DroneMissionService(DroneService droneService) {
+        this.droneService = droneService;
+    }
 
     // 출발지와 목적지 정보를 저장할 맵
     private final Map<Integer, Coordinate> startLocations = new HashMap<>();
@@ -53,7 +56,7 @@ public class DroneMissionService {
         logger.info("드론 인스턴스 ID: {}의 도착지 저장됨 - 위도: {}, 경도: {}",
                 command.getInstanceId(), endCoordinate.getLatitude(), endCoordinate.getLongitude());
 
-        droneService.sendRouteToFrontend(command.getInstanceId());
+        droneService.sendRoute(command.getInstanceId());
 
         return true; // 성공적으로 수행 시 true 반환
     }

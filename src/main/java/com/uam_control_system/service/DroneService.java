@@ -26,50 +26,46 @@ import java.util.Map;
 @Service
 public class DroneService {
     private static final Logger logger = LoggerFactory.getLogger(CommandController.class);
-    private final List<DroneInstance> droneInstances = new ArrayList<>();
     private final RestTemplate restTemplate;
     private final DroneRouteService droneRouteService;
+    private final DroneInstanceRepository droneInstanceRepository;
     @Value("${frontend.url}")
     private String frontendUrl;
 
+    @Value("${simulator.url}")
+    private String simulatorUrl;
+
     @Autowired
-    public DroneService(@Lazy RestTemplate restTemplate, @Lazy DroneRouteService droneRouteService) {
+    public DroneService(RestTemplate restTemplate,
+                        DroneRouteService droneRouteService,
+                        DroneInstanceRepository droneInstanceRepository) {
         this.restTemplate = restTemplate;
         this.droneRouteService = droneRouteService;
+        this.droneInstanceRepository = droneInstanceRepository;
     }
 
-    public void createDrone(DroneInstance droneInstance) {
-        // 드론 인스턴스를 리스트에 추가
-        droneInstances.add(droneInstance);
-
-        // 프론트엔드에 드론 생성 알림 전송
-        sendToFrontend("create", droneInstance);
+    // 데이터베이스에 드론 저장
+    public void saveDroneToRepository(DroneInstance droneInstance) {
+        droneInstanceRepository.addDrone(droneInstance);
     }
 
-    // 프론트엔드로 드론 삭제 알림 전송
-    public void deleteDrone(int instanceId) {
-        // 드론 인스턴스 리스트에서 해당 인스턴스를 찾아 삭제
-        droneInstances.removeIf(drone -> drone.getInstanceId() == instanceId);
-
-        // 프론트엔드에 드론 삭제 알림 전송
-        sendToFrontend("delete", instanceId);
+    // 데이터베이스에서 드론 삭제
+    public void deleteDroneFromRepository(int instanceId) {
+        droneInstanceRepository.removeDrone(instanceId);
     }
 
     // 모든 드론 인스턴스를 반환하는 메서드
     public List<DroneInstance> getAllDroneInstances() {
-        return new ArrayList<>(droneInstances); // 새로운 리스트로 반환
+        return droneInstanceRepository.getAllDrones();
     }
 
     // 특정 드론 인스턴스 위치 정보를 반환하는 메서드
     public DroneInstance getDroneById(int instanceId) {
-        return droneInstances.stream()
-                .filter(drone -> drone.getInstanceId() == instanceId)
-                .findFirst()
-                .orElse(null);
+        return droneInstanceRepository.getDroneById(instanceId);
     }
 
-    // 드론 경로 데이터를 프론트엔드로 전송
-    public void sendRouteToFrontend(int instanceId) {
+    // 드론 경로 데이터를 프론트엔드/시뮬레이터로 전송
+    public void sendRoute(int instanceId) {
         try {
             List<PathCoordinate> droneRoute = droneRouteService.getRoute(instanceId);
             if (droneRoute == null || droneRoute.isEmpty()) {
@@ -83,6 +79,9 @@ public class DroneService {
 
             // 프론트엔드로 전송
             sendToFrontend("path", payload);
+
+            // 시뮬레이터로 경로 전송
+            sendToSimulator(payload);
         } catch (IllegalArgumentException e) {
             logger.error("경로 추출 중 오류 발생: {}", e.getMessage());
         } catch (Exception e) {
@@ -90,9 +89,9 @@ public class DroneService {
         }
     }
 
-    private void sendToFrontend(String type, Object data) {
+    public void sendToFrontend(String type, Object data) {
         try {
-            String url = frontendUrl + "/" + type;
+            String url = frontendUrl + "/uam/" + type;
             HttpHeaders headers = new HttpHeaders();
             headers.set("Content-Type", "application/json");
             HttpEntity<Object> entity = new HttpEntity<>(data, headers);
@@ -105,6 +104,25 @@ public class DroneService {
             }
         } catch (Exception e) {
             logger.error("프론트엔드로 전송 중 오류 발생: {}", e.getMessage());
+        }
+    }
+
+    // 시뮬레이터로 경로 전송
+    public void sendToSimulator(Object data) {
+        try {
+            String url = simulatorUrl + "/uam/path"; // 시뮬레이터의 경로 전송 엔드포인트
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
+            HttpEntity<Object> entity = new HttpEntity<>(data, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                logger.info("시뮬레이터로 전송 성공: {}", data);
+            } else {
+                logger.error("시뮬레이터로 전송 실패. 응답 상태: {}", response.getStatusCode());
+            }
+        } catch (Exception e) {
+            logger.error("시뮬레이터로 전송 중 오류 발생: {}", e.getMessage());
         }
     }
 }

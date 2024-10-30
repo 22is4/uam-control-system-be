@@ -44,8 +44,6 @@ public class CommandController {
         DroneInstance createdDrone = commandService.createDrone(command);
 
         if (createdDrone != null) {
-            // 드론 생성 후 프론트엔드에 알림 전송
-            droneService.createDrone(createdDrone);
             return ResponseEntity.ok("드론 생성 완료"); // 성공 응답 반환
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 생성 실패"); // 실패 응답 반환
@@ -59,8 +57,6 @@ public class CommandController {
         DroneInstance removedDrone = commandService.deleteDrone(command);
 
         if (removedDrone != null) {
-            // 드론 삭제 후 프론트엔드에 알림 전송
-            droneService.deleteDrone(command.getInstanceId());
             return ResponseEntity.ok("드론 삭제 완료"); // 성공 응답 반환
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("드론 삭제 실패"); // 실패 응답 반환
