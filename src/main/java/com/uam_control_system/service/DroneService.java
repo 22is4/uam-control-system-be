@@ -39,11 +39,19 @@ public class DroneService {
     }
 
     public void createDrone(DroneInstance droneInstance) {
+        // 드론 인스턴스를 리스트에 추가
+        droneInstances.add(droneInstance);
+
+        // 프론트엔드에 드론 생성 알림 전송
         sendToFrontend("create", droneInstance);
     }
 
     // 프론트엔드로 드론 삭제 알림 전송
     public void deleteDrone(int instanceId) {
+        // 드론 인스턴스 리스트에서 해당 인스턴스를 찾아 삭제
+        droneInstances.removeIf(drone -> drone.getInstanceId() == instanceId);
+
+        // 프론트엔드에 드론 삭제 알림 전송
         sendToFrontend("delete", instanceId);
     }
 
