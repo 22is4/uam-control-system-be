@@ -1,28 +1,160 @@
-2024-10-21T21:44:21.970+09:00  INFO 21890 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 21890 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
-2024-10-21T21:44:21.974+09:00 DEBUG 21890 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
-2024-10-21T21:44:21.975+09:00  INFO 21890 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
-2024-10-21T21:44:22.794+09:00  INFO 21890 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
-2024-10-21T21:44:22.804+09:00  INFO 21890 --- [main] com.uam_control_system.UamServer         : Started UamServer in 1.089 seconds (process running for 1.31)
-2024-10-21T21:44:29.444+09:00  INFO 21890 --- [reactor-http-nio-2] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=[MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)])
-2024-10-21T21:44:29.456+09:00  INFO 21890 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=[MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)])
-2024-10-21T21:44:29.456+09:00  INFO 21890 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=1, latitude=37.7749, longitude=-122.4194, altitude=0.0, speed=0.0, status=드론 생성 완료)
-2024-10-21T21:44:29.532+09:00 ERROR 21890 --- [reactor-http-nio-2] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-21T12:44:29.512+00:00","path":"/create","status":404,"error":"Not Found","requestId":"9d2cb92c-2"}"
-2024-10-21T21:45:02.911+09:00  INFO 21890 --- [reactor-http-nio-4] c.u.controller.CommandController         : 미션 수행 요청: Command(type=2, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=[MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)])
-2024-10-21T21:45:02.912+09:00  INFO 21890 --- [reactor-http-nio-4] c.u.service.CommandService               : 드론 미션 수신: [MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)]
-2024-10-21T21:46:28.017+09:00  INFO 21977 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 21977 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
-2024-10-21T21:46:28.019+09:00 DEBUG 21977 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
-2024-10-21T21:46:28.019+09:00  INFO 21977 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
-2024-10-21T21:46:28.778+09:00  INFO 21977 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
-2024-10-21T21:46:28.788+09:00  INFO 21977 --- [main] com.uam_control_system.UamServer         : Started UamServer in 1.018 seconds (process running for 1.242)
-2024-10-21T21:46:39.590+09:00  INFO 21977 --- [reactor-http-nio-2] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=[MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)])
-2024-10-21T21:46:39.595+09:00  INFO 21977 --- [reactor-http-nio-2] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 출발지 저장됨 - 위도: 37.7749, 경도: -122.4194
-2024-10-21T21:46:39.596+09:00  INFO 21977 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=[MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)])
-2024-10-21T21:46:39.596+09:00  INFO 21977 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=1, latitude=37.7749, longitude=-122.4194, altitude=0.0, speed=0.0, status=드론 생성 완료)
-2024-10-21T21:46:39.666+09:00 ERROR 21977 --- [reactor-http-nio-2] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-21T12:46:39.642+00:00","path":"/create","status":404,"error":"Not Found","requestId":"46b09ee4-2"}"
-2024-10-21T21:46:47.354+09:00  INFO 21977 --- [reactor-http-nio-4] c.u.controller.CommandController         : 미션 수행 요청: Command(type=2, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=[MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)])
-2024-10-21T21:46:47.356+09:00  INFO 21977 --- [reactor-http-nio-4] c.u.service.CommandService               : 드론 미션 수신: [MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)]
-2024-10-21T21:46:47.361+09:00  INFO 21977 --- [reactor-http-nio-4] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 도착지 저장됨 - 위도: 37.776, 경도: -122.4185
-2024-10-21T21:48:36.352+09:00  INFO 21977 --- [reactor-http-nio-5] c.u.controller.CommandController         : 드론 삭제 요청 처리: Command(type=1, instanceId=1, latitude=0.0, longitude=0.0, missionItems=null)
-2024-10-21T21:48:36.354+09:00  INFO 21977 --- [reactor-http-nio-5] c.u.service.CommandService               : 드론 삭제 명령 수신: Command(type=1, instanceId=1, latitude=0.0, longitude=0.0, missionItems=null)
-2024-10-21T21:48:36.355+09:00  INFO 21977 --- [reactor-http-nio-5] c.u.service.CommandService               : 드론 삭제 성공: 1
-2024-10-21T21:48:36.384+09:00 ERROR 21977 --- [reactor-http-nio-5] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-21T12:48:36.382+00:00","path":"/delete","status":404,"error":"Not Found","requestId":"c2b10e4e-5"}"
+2024-10-30T21:10:30.646+09:00  INFO 16079 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 16079 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
+2024-10-30T21:10:30.650+09:00 DEBUG 16079 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-10-30T21:10:30.650+09:00  INFO 16079 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
+2024-10-30T21:10:31.137+09:00  WARN 16079 --- [main] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'commandController' defined in file [/Users/kimhuisu/uam-control-system-be/build/classes/java/main/com/uam_control_system/controller/CommandController.class]: Unsatisfied dependency expressed through constructor parameter 2: Error creating bean with name 'droneMissionService': Unsatisfied dependency expressed through field 'droneService': Error creating bean with name 'droneService' defined in file [/Users/kimhuisu/uam-control-system-be/build/classes/java/main/com/uam_control_system/service/DroneService.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'droneRouteService' defined in file [/Users/kimhuisu/uam-control-system-be/build/classes/java/main/com/uam_control_system/service/DroneRouteService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'droneMissionService': Requested bean is currently in creation: Is there an unresolvable circular reference?
+2024-10-30T21:10:31.143+09:00  INFO 16079 --- [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-10-30T21:10:31.153+09:00 ERROR 16079 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   commandController defined in file [/Users/kimhuisu/uam-control-system-be/build/classes/java/main/com/uam_control_system/controller/CommandController.class]
+┌─────┐
+|  droneMissionService (field private com.uam_control_system.service.DroneService com.uam_control_system.service.DroneMissionService.droneService)
+↑     ↓
+|  droneService defined in file [/Users/kimhuisu/uam-control-system-be/build/classes/java/main/com/uam_control_system/service/DroneService.class]
+↑     ↓
+|  droneRouteService defined in file [/Users/kimhuisu/uam-control-system-be/build/classes/java/main/com/uam_control_system/service/DroneRouteService.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2024-10-30T21:12:24.878+09:00  INFO 16171 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 16171 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
+2024-10-30T21:12:24.880+09:00 DEBUG 16171 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-10-30T21:12:24.880+09:00  INFO 16171 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
+2024-10-30T21:12:25.651+09:00  INFO 16171 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-10-30T21:12:25.660+09:00  INFO 16171 --- [main] com.uam_control_system.UamServer         : Started UamServer in 1.026 seconds (process running for 1.224)
+2024-10-30T21:14:08.361+09:00  INFO 16171 --- [reactor-http-nio-4] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=null)
+2024-10-30T21:14:08.366+09:00  INFO 16171 --- [reactor-http-nio-4] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 출발지 저장됨 - 위도: 37.7749, 경도: -122.4194
+2024-10-30T21:14:08.367+09:00  INFO 16171 --- [reactor-http-nio-4] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=null)
+2024-10-30T21:14:08.367+09:00  INFO 16171 --- [reactor-http-nio-4] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=1, latitude=37.7749, longitude=-122.4194, altitude=0.0, speed=0.0, status=드론 생성 완료)
+2024-10-30T21:14:08.409+09:00 ERROR 16171 --- [reactor-http-nio-4] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-30T12:14:08.404+00:00","path":"/create","status":404,"error":"Not Found","requestId":"4fea4261-4"}"
+2024-10-30T21:14:46.774+09:00  INFO 16171 --- [reactor-http-nio-6] c.u.controller.CommandController         : 미션 수행 요청: Command(type=2, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=[MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)])
+2024-10-30T21:14:46.781+09:00  INFO 16171 --- [reactor-http-nio-6] c.u.service.CommandService               : 드론 미션 수신: [MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)]
+2024-10-30T21:14:46.782+09:00  INFO 16171 --- [reactor-http-nio-6] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 도착지 저장됨 - 위도: 37.776, 경도: -122.4185
+2024-10-30T21:17:39.614+09:00  INFO 16311 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 16311 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
+2024-10-30T21:17:39.616+09:00 DEBUG 16311 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-10-30T21:17:39.616+09:00  INFO 16311 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
+2024-10-30T21:17:40.400+09:00  INFO 16311 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-10-30T21:17:40.409+09:00  INFO 16311 --- [main] com.uam_control_system.UamServer         : Started UamServer in 1.031 seconds (process running for 1.228)
+2024-10-30T21:18:09.388+09:00  INFO 16311 --- [reactor-http-nio-2] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=null)
+2024-10-30T21:18:09.392+09:00  INFO 16311 --- [reactor-http-nio-2] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 출발지 저장됨 - 위도: 37.7749, 경도: -122.4194
+2024-10-30T21:18:09.393+09:00  INFO 16311 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=null)
+2024-10-30T21:18:09.393+09:00  INFO 16311 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=1, latitude=37.7749, longitude=-122.4194, altitude=0.0, speed=0.0, status=드론 생성 완료)
+2024-10-30T21:18:09.463+09:00 ERROR 16311 --- [reactor-http-nio-2] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-30T12:18:09.444+00:00","path":"/create","status":404,"error":"Not Found","requestId":"6bd85d23-2"}"
+2024-10-30T21:18:27.076+09:00  INFO 16311 --- [reactor-http-nio-4] c.u.controller.CommandController         : 미션 수행 요청: Command(type=2, instanceId=1, latitude=37.7749, longitude=-122.4194, missionItems=[MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)])
+2024-10-30T21:18:27.081+09:00  INFO 16311 --- [reactor-http-nio-4] c.u.service.CommandService               : 드론 미션 수신: [MissionItem(latitude=37.775, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=37.776, longitude=-122.4185, altitude=0.0, speed=0.0)]
+2024-10-30T21:18:27.082+09:00  INFO 16311 --- [reactor-http-nio-4] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 도착지 저장됨 - 위도: 37.776, 경도: -122.4185
+2024-10-30T21:28:22.483+09:00  INFO 16546 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 16546 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
+2024-10-30T21:28:22.485+09:00 DEBUG 16546 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-10-30T21:28:22.486+09:00  INFO 16546 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
+2024-10-30T21:28:23.263+09:00  INFO 16546 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-10-30T21:28:23.277+09:00  INFO 16546 --- [main] com.uam_control_system.UamServer         : Started UamServer in 1.041 seconds (process running for 1.236)
+2024-10-30T21:30:21.880+09:00  INFO 16546 --- [reactor-http-nio-2] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=1, latitude=35.8855, longitude=128.6108, missionItems=null)
+2024-10-30T21:30:21.885+09:00  INFO 16546 --- [reactor-http-nio-2] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 출발지 저장됨 - 위도: 35.8855, 경도: 128.6108
+2024-10-30T21:30:21.885+09:00  INFO 16546 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=1, latitude=35.8855, longitude=128.6108, missionItems=null)
+2024-10-30T21:30:21.885+09:00  INFO 16546 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=1, latitude=35.8855, longitude=128.6108, altitude=0.0, speed=0.0, status=드론 생성 완료)
+2024-10-30T21:30:21.947+09:00 ERROR 16546 --- [reactor-http-nio-2] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-30T12:30:21.929+00:00","path":"/create","status":404,"error":"Not Found","requestId":"ee1ab224-2"}"
+2024-10-30T21:30:35.338+09:00  INFO 16546 --- [reactor-http-nio-4] c.u.controller.CommandController         : 미션 수행 요청: Command(type=2, instanceId=1, latitude=37.7749, longitude=128.6108, missionItems=[MissionItem(latitude=35.875, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=35.875, longitude=128.62, altitude=0.0, speed=0.0)])
+2024-10-30T21:30:35.343+09:00  INFO 16546 --- [reactor-http-nio-4] c.u.service.CommandService               : 드론 미션 수신: [MissionItem(latitude=35.875, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=35.875, longitude=128.62, altitude=0.0, speed=0.0)]
+2024-10-30T21:30:35.343+09:00  INFO 16546 --- [reactor-http-nio-4] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 도착지 저장됨 - 위도: 35.875, 경도: 128.62
+2024-10-30T21:36:09.367+09:00  INFO 16729 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 16729 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
+2024-10-30T21:36:09.369+09:00 DEBUG 16729 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-10-30T21:36:09.369+09:00  INFO 16729 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
+2024-10-30T21:36:10.142+09:00  INFO 16729 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-10-30T21:36:10.168+09:00  INFO 16729 --- [main] com.uam_control_system.UamServer         : Started UamServer in 1.034 seconds (process running for 1.213)
+2024-10-30T21:36:18.182+09:00  INFO 16729 --- [reactor-http-nio-2] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=1, latitude=35.8855, longitude=128.6108, missionItems=null)
+2024-10-30T21:36:18.186+09:00  INFO 16729 --- [reactor-http-nio-2] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 출발지 저장됨 - 위도: 35.8855, 경도: 128.6108
+2024-10-30T21:36:18.186+09:00  INFO 16729 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=1, latitude=35.8855, longitude=128.6108, missionItems=null)
+2024-10-30T21:36:18.187+09:00  INFO 16729 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=1, latitude=35.8855, longitude=128.6108, altitude=0.0, speed=0.0, status=드론 생성 완료)
+2024-10-30T21:36:18.244+09:00 ERROR 16729 --- [reactor-http-nio-2] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-30T12:36:18.225+00:00","path":"/create","status":404,"error":"Not Found","requestId":"3c9f186e-2"}"
+2024-10-30T21:36:26.135+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.controller.CommandController         : 미션 수행 요청: Command(type=2, instanceId=1, latitude=37.7749, longitude=128.6108, missionItems=[MissionItem(latitude=35.875, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=35.875, longitude=128.62, altitude=0.0, speed=0.0)])
+2024-10-30T21:36:26.140+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 도착지 저장됨 - 위도: 35.875, 경도: 128.62
+2024-10-30T21:36:26.141+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : getRoute called with instanceId: 1
+2024-10-30T21:36:26.142+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Start Coordinate: Coordinate(instanceId=0, latitude=37.7749, longitude=128.6108, altitude=0.0, speed=0.0, status=null), End Coordinate: Coordinate(instanceId=0, latitude=35.875, longitude=128.62, altitude=0.0, speed=0.0, status=null)
+2024-10-30T21:36:26.142+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : findClosestCoordinateIndex called with point: Coordinate(instanceId=0, latitude=37.7749, longitude=128.6108, altitude=0.0, speed=0.0, status=null)
+2024-10-30T21:36:26.143+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[0]: 1.9035232097350439
+2024-10-30T21:36:26.143+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[1]: 1.889400000000002
+2024-10-30T21:36:26.143+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[2]: 1.8852645437709843
+2024-10-30T21:36:26.143+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[3]: 1.903170840991429
+2024-10-30T21:36:26.143+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[4]: 1.9084022034152028
+2024-10-30T21:36:26.143+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[5]: 1.9150129634026012
+2024-10-30T21:36:26.143+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[6]: 1.8999222747259974
+2024-10-30T21:36:26.143+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[7]: 1.8945024280797365
+2024-10-30T21:36:26.144+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Closest index found: 2
+2024-10-30T21:36:26.144+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : findClosestCoordinateIndex called with point: Coordinate(instanceId=0, latitude=35.875, longitude=128.62, altitude=0.0, speed=0.0, status=null)
+2024-10-30T21:36:26.144+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[0]: 0.01894518408460841
+2024-10-30T21:36:26.144+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[1]: 0.013960300856352463
+2024-10-30T21:36:26.144+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[2]: 0.028829325347636655
+2024-10-30T21:36:26.144+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[3]: 0.03483819742755164
+2024-10-30T21:36:26.144+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[4]: 0.010580170130961674
+2024-10-30T21:36:26.144+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[5]: 0.03354101966249812
+2024-10-30T21:36:26.145+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[6]: 0.0
+2024-10-30T21:36:26.145+09:00 DEBUG 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[7]: 0.011853269591135343
+2024-10-30T21:36:26.145+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Closest index found: 6
+2024-10-30T21:36:26.145+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Start Index: 2, End Index: 6
+2024-10-30T21:36:26.145+09:00  INFO 16729 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Route Segment: [PathCoordinate(latitude=35.8897, longitude=128.5952, altitude=100.0), PathCoordinate(latitude=35.8719, longitude=128.5853, altitude=100.0), PathCoordinate(latitude=35.8665, longitude=128.6137, altitude=100.0), PathCoordinate(latitude=35.86, longitude=128.59, altitude=100.0), PathCoordinate(latitude=35.875, longitude=128.62, altitude=100.0)]
+2024-10-30T21:36:26.158+09:00 ERROR 16729 --- [reactor-http-nio-4] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-30T12:36:26.155+00:00","path":"/path","status":404,"error":"Not Found","requestId":"aa8e26b7-4"}"
+2024-10-30T21:45:00.450+09:00  INFO 16729 --- [reactor-http-nio-6] c.u.controller.CommandController         : 드론 위치 업데이트 요청 처리: Coordinate(instanceId=0, latitude=35.8888, longitude=128.5004, altitude=100.0, speed=5.0, status=비행 중)
+2024-10-30T21:45:00.452+09:00  INFO 16729 --- [reactor-http-nio-6] c.u.service.CommandService               : 드론 위치 업데이트 명령 수신: Coordinate(instanceId=0, latitude=35.8888, longitude=128.5004, altitude=100.0, speed=5.0, status=비행 중)
+2024-10-30T21:45:00.452+09:00 ERROR 16729 --- [reactor-http-nio-6] c.u.service.CommandService               : 드론 인스턴스 없음: 0
+2024-10-30T21:49:11.112+09:00  INFO 17046 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 17046 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
+2024-10-30T21:49:11.113+09:00 DEBUG 17046 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-10-30T21:49:11.114+09:00  INFO 17046 --- [main] com.uam_control_system.UamServer         : No active profile set, falling back to 1 default profile: "default"
+2024-10-30T21:49:11.895+09:00  INFO 17046 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-10-30T21:49:11.904+09:00  INFO 17046 --- [main] com.uam_control_system.UamServer         : Started UamServer in 1.023 seconds (process running for 1.216)
+2024-10-30T21:49:28.240+09:00  INFO 17046 --- [reactor-http-nio-2] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=1, latitude=35.8855, longitude=128.6108, missionItems=null)
+2024-10-30T21:49:28.244+09:00  INFO 17046 --- [reactor-http-nio-2] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 출발지 저장됨 - 위도: 35.8855, 경도: 128.6108
+2024-10-30T21:49:28.244+09:00  INFO 17046 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=1, latitude=35.8855, longitude=128.6108, missionItems=null)
+2024-10-30T21:49:28.245+09:00  INFO 17046 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=1, latitude=35.8855, longitude=128.6108, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=드론 생성 완료)
+2024-10-30T21:49:28.310+09:00 ERROR 17046 --- [reactor-http-nio-2] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-30T12:49:28.292+00:00","path":"/create","status":404,"error":"Not Found","requestId":"0f569ba7-2"}"
+2024-10-30T21:49:33.854+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.controller.CommandController         : 미션 수행 요청: Command(type=2, instanceId=1, latitude=37.7749, longitude=128.6108, missionItems=[MissionItem(latitude=35.875, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=35.875, longitude=128.62, altitude=0.0, speed=0.0)])
+2024-10-30T21:49:33.859+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 도착지 저장됨 - 위도: 35.875, 경도: 128.62
+2024-10-30T21:49:33.860+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 출발지 저장됨 - 위도: 37.7749, 경도: 128.6108
+2024-10-30T21:49:33.860+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 도착지 저장됨 - 위도: 35.875, 경도: 128.62
+2024-10-30T21:49:33.861+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : getRoute called with instanceId: 1
+2024-10-30T21:49:33.862+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Start Coordinate: Coordinate(instanceId=0, latitude=37.7749, longitude=128.6108, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=null), End Coordinate: Coordinate(instanceId=0, latitude=35.875, longitude=128.62, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=null)
+2024-10-30T21:49:33.863+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : findClosestCoordinateIndex called with point: Coordinate(instanceId=0, latitude=37.7749, longitude=128.6108, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=null)
+2024-10-30T21:49:33.864+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[0]: 1.9035232097350439
+2024-10-30T21:49:33.864+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[1]: 1.889400000000002
+2024-10-30T21:49:33.864+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[2]: 1.8852645437709843
+2024-10-30T21:49:33.864+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[3]: 1.903170840991429
+2024-10-30T21:49:33.864+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[4]: 1.9084022034152028
+2024-10-30T21:49:33.864+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[5]: 1.9150129634026012
+2024-10-30T21:49:33.865+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[6]: 1.8999222747259974
+2024-10-30T21:49:33.865+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[7]: 1.8945024280797365
+2024-10-30T21:49:33.865+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Closest index found: 2
+2024-10-30T21:49:33.865+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : findClosestCoordinateIndex called with point: Coordinate(instanceId=0, latitude=35.875, longitude=128.62, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=null)
+2024-10-30T21:49:33.865+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[0]: 0.01894518408460841
+2024-10-30T21:49:33.865+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[1]: 0.013960300856352463
+2024-10-30T21:49:33.865+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[2]: 0.028829325347636655
+2024-10-30T21:49:33.865+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[3]: 0.03483819742755164
+2024-10-30T21:49:33.866+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[4]: 0.010580170130961674
+2024-10-30T21:49:33.866+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[5]: 0.03354101966249812
+2024-10-30T21:49:33.866+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[6]: 0.0
+2024-10-30T21:49:33.866+09:00 DEBUG 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Distance to PathCoordinate[7]: 0.011853269591135343
+2024-10-30T21:49:33.866+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Closest index found: 6
+2024-10-30T21:49:33.866+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Start Index: 2, End Index: 6
+2024-10-30T21:49:33.866+09:00  INFO 17046 --- [reactor-http-nio-4] c.u.service.DroneRouteService            : Route : [PathCoordinate(latitude=35.8897, longitude=128.5952, altitude=100.0), PathCoordinate(latitude=35.8719, longitude=128.5853, altitude=100.0), PathCoordinate(latitude=35.8665, longitude=128.6137, altitude=100.0), PathCoordinate(latitude=35.86, longitude=128.59, altitude=100.0), PathCoordinate(latitude=35.875, longitude=128.62, altitude=100.0)]
+2024-10-30T21:49:33.879+09:00 ERROR 17046 --- [reactor-http-nio-4] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-30T12:49:33.876+00:00","path":"/path","status":404,"error":"Not Found","requestId":"80c449e1-4"}"
+2024-10-30T21:49:43.071+09:00  INFO 17046 --- [reactor-http-nio-6] c.u.controller.CommandController         : 드론 위치 업데이트 요청 처리: Coordinate(instanceId=0, latitude=35.8888, longitude=128.5004, altitude=100.0, vx=0.5, vy=0.5, vz=0.0, speed=5.0, status=비행 중)
+2024-10-30T21:49:43.072+09:00  INFO 17046 --- [reactor-http-nio-6] c.u.service.CommandService               : 드론 위치 업데이트 명령 수신: Coordinate(instanceId=0, latitude=35.8888, longitude=128.5004, altitude=100.0, vx=0.5, vy=0.5, vz=0.0, speed=5.0, status=비행 중)
+2024-10-30T21:49:43.073+09:00 ERROR 17046 --- [reactor-http-nio-6] c.u.service.CommandService               : 드론 인스턴스 없음: 0
+2024-10-30T21:51:29.217+09:00  INFO 17046 --- [reactor-http-nio-7] c.u.controller.CommandController         : 드론 위치 업데이트 요청 처리: Coordinate(instanceId=1, latitude=35.8888, longitude=128.5004, altitude=100.0, vx=0.5, vy=0.5, vz=0.0, speed=5.0, status=비행 중)
+2024-10-30T21:51:29.218+09:00  INFO 17046 --- [reactor-http-nio-7] c.u.service.CommandService               : 드론 위치 업데이트 명령 수신: Coordinate(instanceId=1, latitude=35.8888, longitude=128.5004, altitude=100.0, vx=0.5, vy=0.5, vz=0.0, speed=5.0, status=비행 중)
+2024-10-30T21:51:29.219+09:00  INFO 17046 --- [reactor-http-nio-7] c.u.service.CommandService               : 드론 위치 업데이트 완료: DroneInstance(instanceId=1, latitude=35.8888, longitude=128.5004, altitude=100.0, vx=0.0, vy=0.0, vz=0.0, speed=5.0, status=비행 중)
+2024-10-30T21:53:02.708+09:00  INFO 17046 --- [reactor-http-nio-8] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=2, latitude=35.8856, longitude=128.6109, missionItems=null)
+2024-10-30T21:53:02.709+09:00  INFO 17046 --- [reactor-http-nio-8] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 2의 출발지 저장됨 - 위도: 35.8856, 경도: 128.6109
+2024-10-30T21:53:02.709+09:00  INFO 17046 --- [reactor-http-nio-8] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=2, latitude=35.8856, longitude=128.6109, missionItems=null)
+2024-10-30T21:53:02.710+09:00  INFO 17046 --- [reactor-http-nio-8] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=2, latitude=35.8856, longitude=128.6109, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=드론 생성 완료)
+2024-10-30T21:53:02.726+09:00 ERROR 17046 --- [reactor-http-nio-8] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-10-30T12:53:02.722+00:00","path":"/create","status":404,"error":"Not Found","requestId":"a70b9bc9-8"}"

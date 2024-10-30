@@ -27,6 +27,9 @@ public class CommandService {
                     command.getLatitude(),
                     command.getLongitude(),
                     0.0,  // 초기 고도
+                    0.0,
+                    0.0,
+                    0.0,
                     0.0,  // 초기 속도
                     "드론 생성 완료"
             );
@@ -53,16 +56,6 @@ public class CommandService {
         return null;
     }
 
-    // 드론 미션 수행 명령 처리
-    public boolean executeMission(Command command) {
-        if (command.getType() == 2) { // 미션 수행 명령
-//            ResponseEntity<Void> response = restTemplate.postForEntity(simulatorUrl + "/mission", command, Void.class);
-//            return response.getStatusCode().is2xxSuccessful(); // 성공 여부 반환
-            logger.info("드론 미션 수신: {}", command.getMissionItems());
-            return true;
-        }
-        return false; // 실패 시 false 반환
-    }
     public boolean updateDroneStatus(Coordinate coordinate) {
         logger.info("드론 위치 업데이트 명령 수신: {}", coordinate);
 

@@ -12,6 +12,9 @@ public class DroneInstance {
     private double latitude;
     private double longitude;
     private double altitude;
+    private double vx;
+    private double vy;
+    private double vz;
     private double speed;
     private String status;
 }

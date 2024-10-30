@@ -80,10 +80,10 @@ public class CommandController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("미션 아이템이 없습니다");
             }
 
-            boolean success = commandService.executeMission(command);
+            // 도착지 저장
+            droneMissionService.saveEndLocation(command);
+            boolean success = droneMissionService.executeMission(command);
             if (success) {
-                // 도착지 저장
-                droneMissionService.saveEndLocation(command);
                 return ResponseEntity.ok("미션 수행 요청 완료");
             } else {
                 logger.error("미션 수행 실패: {}", command);

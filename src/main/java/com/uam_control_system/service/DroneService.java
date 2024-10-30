@@ -2,7 +2,10 @@ package com.uam_control_system.service;
 
 import com.uam_control_system.controller.CommandController;
 import com.uam_control_system.model.DroneInstance;
+import com.uam_control_system.model.PathCoordinate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,19 +18,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 @Service
 public class DroneService {
     private static final Logger logger = LoggerFactory.getLogger(CommandController.class);
     private final List<DroneInstance> droneInstances = new ArrayList<>();
-//    private final DroneController droneController;
     private final RestTemplate restTemplate;
+    private final DroneRouteService droneRouteService;
     @Value("${frontend.url}")
     private String frontendUrl;
 
-    public DroneService(RestTemplate restTemplate) {
+    @Autowired
+    public DroneService(@Lazy RestTemplate restTemplate, @Lazy DroneRouteService droneRouteService) {
         this.restTemplate = restTemplate;
+        this.droneRouteService = droneRouteService;
     }
 
     public void createDrone(DroneInstance droneInstance) {
@@ -52,7 +60,28 @@ public class DroneService {
                 .orElse(null);
     }
 
-    // 프론트엔드로 알림 전송
+    // 드론 경로 데이터를 프론트엔드로 전송
+    public void sendRouteToFrontend(int instanceId) {
+        try {
+            List<PathCoordinate> droneRoute = droneRouteService.getRoute(instanceId);
+            if (droneRoute == null || droneRoute.isEmpty()) {
+                logger.error("드론 인스턴스 ID {}에 대한 유효한 구간 데이터가 없습니다.", instanceId);
+                return;
+            }
+            // 드론 ID와 좌표 리스트를 담을 Map 생성
+            Map<String, Object> payload = new HashMap<>();
+            payload.put("instanceId", instanceId);
+            payload.put("coordinates", droneRoute);
+
+            // 프론트엔드로 전송
+            sendToFrontend("path", payload);
+        } catch (IllegalArgumentException e) {
+            logger.error("경로 추출 중 오류 발생: {}", e.getMessage());
+        } catch (Exception e) {
+            logger.error("경로 전송 중 오류 발생: {}", e.getMessage());
+        }
+    }
+
     private void sendToFrontend(String type, Object data) {
         try {
             String url = frontendUrl + "/" + type;
