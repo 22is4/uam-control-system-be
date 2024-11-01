@@ -80,8 +80,6 @@ public class DroneService {
             // 프론트엔드로 전송
             sendToFrontend("path", payload);
 
-            // 시뮬레이터로 경로 전송
-            sendToSimulator(payload);
         } catch (IllegalArgumentException e) {
             logger.error("경로 추출 중 오류 발생: {}", e.getMessage());
         } catch (Exception e) {
@@ -99,6 +97,9 @@ public class DroneService {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
             if (response.getStatusCode() == HttpStatus.OK) {
                 logger.info("프론트엔드로 전송 성공: {}", data);
+
+                // 시뮬레이터로 경로 전송
+                sendToSimulator(data);
             } else {
                 logger.error("프론트엔드로 전송 실패. 응답 상태: {}", response.getStatusCode());
             }
