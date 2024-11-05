@@ -32,9 +32,6 @@ public class DroneService {
     @Value("${frontend.url}")
     private String frontendUrl;
 
-    @Value("${simulator.url}")
-    private String simulatorUrl;
-
     @Autowired
     public DroneService(RestTemplate restTemplate,
                         DroneRouteService droneRouteService,
@@ -64,7 +61,7 @@ public class DroneService {
         return droneInstanceRepository.getDroneById(instanceId);
     }
 
-    // 드론 경로 데이터를 프론트엔드/시뮬레이터로 전송
+    // 드론 경로 데이터를 프론트엔드로 전송
     public void sendRoute(int instanceId) {
         try {
             List<PathCoordinate> droneRoute = droneRouteService.getRoute(instanceId);
@@ -97,33 +94,11 @@ public class DroneService {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
             if (response.getStatusCode() == HttpStatus.OK) {
                 logger.info("프론트엔드로 전송 성공: {}", data);
-
-                // 시뮬레이터로 경로 전송
-                sendToSimulator(data);
             } else {
                 logger.error("프론트엔드로 전송 실패. 응답 상태: {}", response.getStatusCode());
             }
         } catch (Exception e) {
             logger.error("프론트엔드로 전송 중 오류 발생: {}", e.getMessage());
-        }
-    }
-
-    // 시뮬레이터로 경로 전송
-    public void sendToSimulator(Object data) {
-        try {
-            String url = simulatorUrl + "/uam/path"; // 시뮬레이터의 경로 전송 엔드포인트
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Content-Type", "application/json");
-            HttpEntity<Object> entity = new HttpEntity<>(data, headers);
-
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-            if (response.getStatusCode() == HttpStatus.OK) {
-                logger.info("시뮬레이터로 전송 성공: {}", data);
-            } else {
-                logger.error("시뮬레이터로 전송 실패. 응답 상태: {}", response.getStatusCode());
-            }
-        } catch (Exception e) {
-            logger.error("시뮬레이터로 전송 중 오류 발생: {}", e.getMessage());
         }
     }
 }
