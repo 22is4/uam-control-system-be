@@ -8,21 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class DroneRouteService {
 
     private final Logger logger = LoggerFactory.getLogger(DroneRouteService.class);
     private final List<List<PathCoordinate>> allRoutes;
+    private final Map<Integer, List<PathCoordinate>> droneRouteMap;
+
     private final DroneMissionService droneMissionService;
 
     @Autowired
     public DroneRouteService(@Lazy DroneMissionService droneMissionService) {
         this.droneMissionService = droneMissionService;
         this.allRoutes = new ArrayList<>();
+        this.droneRouteMap = new HashMap<>();
 
         // 각 노선을 개별 리스트로 추가
         List<PathCoordinate> route1 = new ArrayList<>();
@@ -115,6 +116,7 @@ public class DroneRouteService {
             // 역방향으로 추출된 구간을 반대로 정렬하여 올바른 순서로 반환
             Collections.reverse(routeSegment);
         }
+        droneRouteMap.put(instanceId, routeSegment);
         logger.info("Route Segment: {}", routeSegment);
         return routeSegment;
     }
@@ -156,4 +158,19 @@ public class DroneRouteService {
         double lonDiff = p1.getLongitude() - p2.getLongitude();
         return Math.sqrt(latDiff * latDiff + lonDiff * lonDiff);
     }
+
+    // 시뮬레이터의 경로 요청 처리
+    public List<PathCoordinate> getRouteForInstance(int instanceId) {
+        logger.info("getRouteForInstance called with instanceId: {}", instanceId);
+
+        List<PathCoordinate> routeSegment = droneRouteMap.get(instanceId);
+        if (routeSegment == null) {
+            logger.error("드론 인스턴스 번호 {}에 대한 경로가 존재하지 않습니다.", instanceId);
+            throw new IllegalArgumentException("드론 인스턴스 번호에 대한 경로가 존재하지 않습니다.");
+        }
+
+        logger.info("Returning route segment for instanceId {}: {}", instanceId, routeSegment);
+        return routeSegment;
+    }
+
 }
