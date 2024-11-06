@@ -25,9 +25,6 @@ public class CommandService {
         this.droneInstanceRepository = droneInstanceRepository;
     }
 
-    // 드론 인스턴스를 관리하기 위한 Map
-//    private final Map<Integer, DroneInstance> droneInstances = new HashMap<>();
-
     // 드론 생성 명령 처리
     public DroneInstance createDrone(Command command) {
         logger.info("드론 생성 명령 수신: {}", command);
@@ -44,7 +41,7 @@ public class CommandService {
                     "드론 생성 완료"
             );
             droneInstanceRepository.addDrone(createdDrone);
-            droneService.sendToFrontend("create", createdDrone);
+//            droneService.sendToFrontend("create", createdDrone);
             logger.info("드론 생성 성공: {}", createdDrone);
             return createdDrone;
         }
@@ -59,7 +56,7 @@ public class CommandService {
             DroneInstance removedDrone = droneInstanceRepository.getDroneById(command.getInstanceId());
             if (removedDrone != null) {
                 droneInstanceRepository.removeDrone(command.getInstanceId());
-                droneService.sendToFrontend("delete", command.getInstanceId());
+//                droneService.sendToFrontend("delete", command.getInstanceId());
                 logger.info("드론 삭제 성공: {}", command.getInstanceId());
                 return removedDrone;
             } else {
