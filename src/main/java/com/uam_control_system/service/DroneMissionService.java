@@ -32,7 +32,7 @@ public class DroneMissionService {
         if (missionItems == null || missionItems.isEmpty()) {
             throw new IllegalArgumentException("미션 아이템이 없습니다.");
         }
-        droneService.sendRoute(command.getInstanceId());
+//        droneService.sendRoute(command.getInstanceId());
         return true;
     }
 
