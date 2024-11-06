@@ -1,0 +1,78 @@
+2024-11-06T17:00:00.483+09:00  INFO 33663 --- [main] com.uam_control_system.UamServer         : Starting UamServer using Java 17.0.6 with PID 33663 (/Users/kimhuisu/uam-control-system-be/build/classes/java/main started by kimhuisu in /Users/kimhuisu/uam-control-system-be)
+2024-11-06T17:00:00.484+09:00 DEBUG 33663 --- [main] com.uam_control_system.UamServer         : Running with Spring Boot v3.3.2, Spring v6.1.11
+2024-11-06T17:00:00.484+09:00  INFO 33663 --- [main] com.uam_control_system.UamServer         : The following 1 profile is active: "env"
+2024-11-06T17:00:00.990+09:00  INFO 33663 --- [main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8081 (http)
+2024-11-06T17:00:00.996+09:00  INFO 33663 --- [main] com.uam_control_system.UamServer         : Started UamServer in 0.684 seconds (process running for 0.811)
+2024-11-06T17:00:17.357+09:00  INFO 33663 --- [reactor-http-nio-2] c.u.controller.CommandController         : 드론 생성 요청 처리: Command(type=0, instanceId=1, latitude=35.8429, longitude=128.5668, missionItems=null)
+2024-11-06T17:00:17.367+09:00  INFO 33663 --- [reactor-http-nio-2] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 출발지 저장됨 - 위도: 35.8429, 경도: 128.5668
+2024-11-06T17:00:17.367+09:00  INFO 33663 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 명령 수신: Command(type=0, instanceId=1, latitude=35.8429, longitude=128.5668, missionItems=null)
+2024-11-06T17:00:17.367+09:00  INFO 33663 --- [reactor-http-nio-2] c.u.service.CommandService               : 드론 생성 성공: DroneInstance(instanceId=1, latitude=35.8429, longitude=128.5668, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=드론 생성 완료)
+2024-11-06T17:00:32.237+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.controller.CommandController         : 미션 수행 요청: Command(type=2, instanceId=1, latitude=0.0, longitude=0.0, missionItems=[MissionItem(latitude=35.8698, longitude=-122.4195, altitude=0.0, speed=0.0), MissionItem(latitude=35.8667, longitude=128.6053, altitude=0.0, speed=0.0)])
+2024-11-06T17:00:32.242+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneMissionService          : 드론 인스턴스 ID: 1의 도착지 저장됨 - 위도: 35.8667, 경도: 128.6053
+2024-11-06T17:00:32.242+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : getRoute called with instanceId: 1
+2024-11-06T17:00:32.244+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Start Coordinate: Coordinate(instanceId=0, latitude=35.8429, longitude=128.5668, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=null), End Coordinate: Coordinate(instanceId=0, latitude=35.8667, longitude=128.6053, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=null)
+2024-11-06T17:00:32.245+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : findClosestCoordinateIndex called with point: Coordinate(instanceId=0, latitude=35.8429, longitude=128.5668, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=null)
+2024-11-06T17:00:32.245+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[0]: 0.0
+2024-11-06T17:00:32.246+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[1]: 0.012093386622452336
+2024-11-06T17:00:32.246+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[2]: 0.016865645555384976
+2024-11-06T17:00:32.246+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[3]: 0.03138295715830933
+2024-11-06T17:00:32.246+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[4]: 0.037916355310066506
+2024-11-06T17:00:32.246+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[5]: 0.04106799240283533
+2024-11-06T17:00:32.247+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[6]: 0.044127655727448624
+2024-11-06T17:00:32.247+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[7]: 0.04526245684891614
+2024-11-06T17:00:32.247+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[8]: 0.04599673901484394
+2024-11-06T17:00:32.247+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[9]: 0.051523975001938706
+2024-11-06T17:00:32.247+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[10]: 0.05363077474732874
+2024-11-06T17:00:32.247+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[11]: 0.05441837924818101
+2024-11-06T17:00:32.247+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[12]: 0.05108130773579614
+2024-11-06T17:00:32.247+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[13]: 0.046415514647577046
+2024-11-06T17:00:32.248+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[14]: 0.04984014446207031
+2024-11-06T17:00:32.248+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[15]: 0.055978656646979416
+2024-11-06T17:00:32.248+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[16]: 0.06015920544688856
+2024-11-06T17:00:32.248+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[17]: 0.05713177749729463
+2024-11-06T17:00:32.248+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[18]: 0.06012694903285294
+2024-11-06T17:00:32.248+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[19]: 0.06503575939435807
+2024-11-06T17:00:32.248+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[20]: 0.07286528460109752
+2024-11-06T17:00:32.248+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[21]: 0.07117002529155737
+2024-11-06T17:00:32.249+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[22]: 0.07116844525490999
+2024-11-06T17:00:32.249+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[23]: 0.073371619853995
+2024-11-06T17:00:32.249+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[24]: 0.07778260088219757
+2024-11-06T17:00:32.249+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[25]: 0.07871306435402144
+2024-11-06T17:00:32.249+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[26]: 0.08054699311582349
+2024-11-06T17:00:32.249+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[27]: 0.08092832693192564
+2024-11-06T17:00:32.249+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[28]: 0.08111920241225717
+2024-11-06T17:00:32.249+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Closest index found: 0
+2024-11-06T17:00:32.249+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : findClosestCoordinateIndex called with point: Coordinate(instanceId=0, latitude=35.8667, longitude=128.6053, altitude=0.0, vx=0.0, vy=0.0, vz=0.0, speed=0.0, status=null)
+2024-11-06T17:00:32.250+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[0]: 0.04526245684891614
+2024-11-06T17:00:32.250+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[1]: 0.04964876634922903
+2024-11-06T17:00:32.250+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[2]: 0.048558418425633354
+2024-11-06T17:00:32.252+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[3]: 0.01770254219030909
+2024-11-06T17:00:32.255+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[4]: 0.007589466384415633
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[5]: 0.004482186966209748
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[6]: 0.0016492422502432207
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[7]: 0.0
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[8]: 8.062257748275354E-4
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[9]: 0.008023091673420715
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[10]: 0.009066973034025882
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[11]: 0.009406912352085938
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[12]: 0.01116467643955727
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[13]: 0.015901257811888905
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[14]: 0.01811767093199092
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[15]: 0.023160310878738263
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[16]: 0.021433618453262193
+2024-11-06T17:00:32.256+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[17]: 0.02145530237493722
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[18]: 0.023221541723145958
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[19]: 0.025880494585690403
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[20]: 0.03231290299554636
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[21]: 0.0333717320497445
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[22]: 0.03494334843714994
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[23]: 0.03692016522172736
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[24]: 0.03964397810512834
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[25]: 0.04155688270310936
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[26]: 0.04282630149802959
+2024-11-06T17:00:32.257+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[27]: 0.043588761166151894
+2024-11-06T17:00:32.258+09:00 DEBUG 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Distance to PathCoordinate[28]: 0.04368987296845992
+2024-11-06T17:00:32.258+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Closest index found: 7
+2024-11-06T17:00:32.258+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Start Index: 0, End Index: 7
+2024-11-06T17:00:32.258+09:00  INFO 33663 --- [reactor-http-nio-3] c.u.service.DroneRouteService            : Route Segment: [PathCoordinate(latitude=35.8429, longitude=128.5668, altitude=450.0), PathCoordinate(latitude=35.8513, longitude=128.5581, altitude=450.0), PathCoordinate(latitude=35.8571, longitude=128.5577, altitude=450.0), PathCoordinate(latitude=35.8664, longitude=128.5876, altitude=450.0), PathCoordinate(latitude=35.8643, longitude=128.5981, altitude=450.0), PathCoordinate(latitude=35.8632, longitude=128.6025, altitude=450.0), PathCoordinate(latitude=35.8671, longitude=128.6037, altitude=450.0), PathCoordinate(latitude=35.8667, longitude=128.6053, altitude=450.0)]
+2024-11-06T17:00:32.326+09:00 ERROR 33663 --- [reactor-http-nio-3] c.u.controller.CommandController         : 프론트엔드로 전송 중 오류 발생: 404 Not Found: "{"timestamp":"2024-11-06T08:00:32.314+00:00","path":"/uam/path","status":404,"error":"Not Found","requestId":"f652d50a-3"}"
