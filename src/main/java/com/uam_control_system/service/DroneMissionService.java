@@ -3,6 +3,7 @@ package com.uam_control_system.service;
 import com.uam_control_system.model.Command;
 import com.uam_control_system.model.Coordinate;
 import com.uam_control_system.model.MissionItem;
+import com.uam_control_system.model.PathCoordinate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +16,10 @@ import java.util.Map;
 @Service
 public class DroneMissionService {
     private static final Logger logger = LoggerFactory.getLogger(DroneMissionService.class);
-    private final DroneService droneService;
+    private final DroneRouteService droneRouteService;
     @Autowired
-    public DroneMissionService(DroneService droneService) {
-        this.droneService = droneService;
+    public DroneMissionService(DroneRouteService droneRouteService) {
+        this.droneRouteService = droneRouteService;
     }
 
     // 출발지와 목적지 정보를 저장할 맵
@@ -32,7 +33,7 @@ public class DroneMissionService {
         if (missionItems == null || missionItems.isEmpty()) {
             throw new IllegalArgumentException("미션 아이템이 없습니다.");
         }
-//        droneService.sendRoute(command.getInstanceId());
+        droneRouteService.getRoute(command.getInstanceId());
         return true;
     }
 
