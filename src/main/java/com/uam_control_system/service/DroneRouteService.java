@@ -78,6 +78,17 @@ public class DroneRouteService {
         route2.add(new PathCoordinate(35.88489, 128.65105, 450)); // 동촌유원지 주차장
         route2.add(new PathCoordinate(35.89928, 128.63742, 450)); // 대구국제공항
         allRoutes.add(route2);
+
+        List<PathCoordinate> route3 = new ArrayList<>();
+        route3.add(new PathCoordinate(35.89928, 128.63742, 450)); // 대구국제공항
+        route3.add(new PathCoordinate(35.89993, 128.62717, 450)); // 경유지
+        route3.add(new PathCoordinate(35.87541, 128.62758, 450)); // 대구 메리어트 호텔
+        route3.add(new PathCoordinate(35.85775, 128.62509, 450)); // 대구 그랜드 호텔
+        route3.add(new PathCoordinate(35.86672, 128.59063, 450)); // 더현대 대구
+        route3.add(new PathCoordinate(35.86657, 128.58756, 450)); // 경유지
+        route3.add(new PathCoordinate(35.86035, 128.56457, 450)); // 경유지
+        route3.add(new PathCoordinate(35.85330, 128.56656, 450)); // 83타워 옥상
+        allRoutes.add(route3);
     }
 
     // 특정 드론의 출발지와 목적지 사이 구간 추출
