@@ -1,7 +1,10 @@
 package com.uam_control_system.service;
 
 import com.uam_control_system.model.Coordinate;
+import com.uam_control_system.model.DroneRoute;
 import com.uam_control_system.model.PathCoordinate;
+import com.uam_control_system.dto.PathCoordinateDTO;
+import com.uam_control_system.repository.DroneRouteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,86 +17,26 @@ import java.util.*;
 public class DroneRouteService {
 
     private final Logger logger = LoggerFactory.getLogger(DroneRouteService.class);
-    private final List<List<PathCoordinate>> allRoutes;
-    private final Map<Integer, List<PathCoordinate>> droneRouteMap;
+    private final List<List<PathCoordinateDTO>> allRoutes;
+    private final Map<Integer, List<PathCoordinateDTO>> droneRouteMap;
 
     private final DroneMissionService droneMissionService;
+    private final DroneRouteRepository droneRouteRepository;
 
     @Autowired
-    public DroneRouteService(@Lazy DroneMissionService droneMissionService) {
+    public DroneRouteService(@Lazy DroneMissionService droneMissionService, DroneRouteRepository droneRouteRepository) {
         this.droneMissionService = droneMissionService;
+        this.droneRouteRepository = droneRouteRepository;
         this.allRoutes = new ArrayList<>();
         this.droneRouteMap = new HashMap<>();
-
-        // 각 노선을 개별 리스트로 추가
-        List<PathCoordinate> route1 = new ArrayList<>();
-        route1.add(new PathCoordinate(35.8429, 128.5668, 450)); // 대구 가톨릭대학교 병원 남문 주차장
-        route1.add(new PathCoordinate(35.8513, 128.5581, 450)); // 두류 공원 주차장
-        route1.add(new PathCoordinate(35.8571, 128.5577, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8664, 128.5876, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8643, 128.5981, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8632, 128.6025, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8671, 128.6037, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8667, 128.6053, 450)); // 경북대학교 병원
-        route1.add(new PathCoordinate(35.8668, 128.6061, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8653, 128.6132, 450)); // 신천(경유지)
-        route1.add(new PathCoordinate(35.8678, 128.6143, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8735, 128.6118, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8778, 128.6041, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8793, 128.5956, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8827, 128.5968, 450)); // 삼성 창조 캠퍼스 정류장
-        route1.add(new PathCoordinate(35.8889, 128.5987, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8881, 128.6065, 450)); // 경북대학교 대운동장
-        route1.add(new PathCoordinate(35.8879, 128.6020, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8899, 128.6043, 450)); // 경유지
-        route1.add(new PathCoordinate(35.8923, 128.6091, 450)); // 경유지
-        route1.add(new PathCoordinate(35.89751, 128.61504, 450)); // 경유지
-        route1.add(new PathCoordinate(35.89980, 128.60955, 450)); // 경유지
-        route1.add(new PathCoordinate(35.90160, 128.60704, 450)); // 경유지
-        route1.add(new PathCoordinate(35.90351, 128.60815, 450)); // 경유지
-        route1.add(new PathCoordinate(35.90563, 128.61279, 450)); // 경유지
-        route1.add(new PathCoordinate(35.90782, 128.61131, 450)); // 경유지
-        route1.add(new PathCoordinate(35.90881, 128.61310, 450)); // 경유지
-        route1.add(new PathCoordinate(35.90969, 128.61250, 450)); // 경유지
-        route1.add(new PathCoordinate(35.90975, 128.61275, 450)); // 엑스코 인근 주차장
-        allRoutes.add(route1);
-
-        List<PathCoordinate> route2 = new ArrayList<>();
-        route2.add(new PathCoordinate(35.85240, 128.49025, 450)); // 계명대학교 주차장
-        route2.add(new PathCoordinate(35.85139, 128.49227, 450)); // 경유지
-        route2.add(new PathCoordinate(35.85203, 128.50359, 450)); // 경유지
-        route2.add(new PathCoordinate(35.85172, 128.50602, 450)); // 경유지
-        route2.add(new PathCoordinate(35.85151, 128.50599, 450)); // 성서주유소
-        route2.add(new PathCoordinate(35.85056, 128.51542, 450)); // 경유지
-        route2.add(new PathCoordinate(35.85010, 128.52032, 450)); // 경유지
-        route2.add(new PathCoordinate(35.86303, 128.52593, 450)); // 경유지
-        route2.add(new PathCoordinate(35.86835, 128.53050, 450)); // 경유지
-        route2.add(new PathCoordinate(35.87187, 128.56282, 450)); // 경유지
-        route2.add(new PathCoordinate(35.87228, 128.57114, 450)); // 경유지
-        route2.add(new PathCoordinate(35.87172, 128.57754, 450)); // 서문주차장
-        route2.add(new PathCoordinate(35.87030, 128.57953, 450)); // 경유지
-        route2.add(new PathCoordinate(35.86779, 128.58259, 450)); // 계명대학교 동산병원 주차장
-        route2.add(new PathCoordinate(35.86257, 128.57518, 450)); // 대구 중부 소방서
-        route2.add(new PathCoordinate(35.87523, 128.59517, 450)); // 대구역
-        route2.add(new PathCoordinate(35.88489, 128.65105, 450)); // 동촌유원지 주차장
-        route2.add(new PathCoordinate(35.89928, 128.63742, 450)); // 대구국제공항
-        allRoutes.add(route2);
-
-        List<PathCoordinate> route3 = new ArrayList<>();
-        route3.add(new PathCoordinate(35.89928, 128.63742, 450)); // 대구국제공항
-        route3.add(new PathCoordinate(35.89993, 128.62717, 450)); // 경유지
-        route3.add(new PathCoordinate(35.87541, 128.62758, 450)); // 대구 메리어트 호텔
-        route3.add(new PathCoordinate(35.85775, 128.62509, 450)); // 대구 그랜드 호텔
-        route3.add(new PathCoordinate(35.86672, 128.59063, 450)); // 더현대 대구
-        route3.add(new PathCoordinate(35.86657, 128.58756, 450)); // 경유지
-        route3.add(new PathCoordinate(35.86035, 128.56457, 450)); // 경유지
-        route3.add(new PathCoordinate(35.85330, 128.56656, 450)); // 83타워 옥상
-        allRoutes.add(route3);
     }
 
     // 특정 드론의 출발지와 목적지 사이 구간 추출
-    public List<PathCoordinate> getRoute(int instanceId) {
+    public List<PathCoordinateDTO> getRoute(int instanceId) {
         logger.info("getRoute called with instanceId: {}", instanceId);
+
+        // 데이터베이스에서 경로 로드
+        List<List<PathCoordinate>> routes = getAllRoutes();
 
         Coordinate startCoordinate = droneMissionService.getStartLocation(instanceId);
         Coordinate endCoordinate = droneMissionService.getEndLocation(instanceId);
@@ -106,7 +49,7 @@ public class DroneRouteService {
         }
 
         // 가장 가까운 노선을 찾고 해당 노선의 경유지 추출
-        List<PathCoordinate> nearestRoute = findNearestRoute(startCoordinate);
+        List<PathCoordinate> nearestRoute = findNearestRoute(routes, startCoordinate); // 변경됨
         int startIndex = findClosestCoordinateIndex(startCoordinate, nearestRoute);
         int endIndex = findClosestCoordinateIndex(endCoordinate, nearestRoute);
 
@@ -127,16 +70,37 @@ public class DroneRouteService {
             // 역방향으로 추출된 구간을 반대로 정렬하여 올바른 순서로 반환
             Collections.reverse(routeSegment);
         }
-        droneRouteMap.put(instanceId, routeSegment);
-        logger.info("Route Segment: {}", routeSegment);
-        return routeSegment;
+
+        List<PathCoordinateDTO> final_route = convertToDTO(routeSegment);
+        droneRouteMap.put(instanceId, final_route);
+        logger.info("Route Segment: {}", final_route);
+
+        return final_route;
     }
 
-    private List<PathCoordinate> findNearestRoute(Coordinate point) {
+    // 데이터베이스에서 전체 경로 가져오기
+    private List<List<PathCoordinate>> getAllRoutes() {
+        logger.info("Fetching all routes from database.");
+
+        // 데이터베이스에서 모든 DroneRoute를 가져오기
+        List<DroneRoute> allRouteEntities = droneRouteRepository.findAll();
+
+        // route_id별로 경로를 그룹화
+        Map<Integer, List<PathCoordinate>> routeMap = new HashMap<>();
+        for (DroneRoute entity : allRouteEntities) {
+            routeMap.computeIfAbsent(entity.getRouteId(), k -> new ArrayList<>())
+                    .add(new PathCoordinate(entity)); // DroneRoute 생성자를 사용
+        }
+
+        // 그룹화된 경로를 List로 변환
+        return new ArrayList<>(routeMap.values());
+    }
+
+    private List<PathCoordinate> findNearestRoute(List<List<PathCoordinate>> routes, Coordinate point) {
         double minDistance = Double.MAX_VALUE;
         List<PathCoordinate> nearestRoute = null;
 
-        for (List<PathCoordinate> route : allRoutes) {
+        for (List<PathCoordinate> route : routes) {
             double distance = calculateDistance(point, route.get(0));
             if (distance < minDistance) {
                 minDistance = distance;
@@ -170,11 +134,20 @@ public class DroneRouteService {
         return Math.sqrt(latDiff * latDiff + lonDiff * lonDiff);
     }
 
-    // 시뮬레이터의 경로 요청 처리
-    public List<PathCoordinate> getRouteForInstance(int instanceId) {
+    // PathCoordinate 리스트를 PathCoordinateDTO 리스트로 변환
+    private List<PathCoordinateDTO> convertToDTO(List<PathCoordinate> pathCoordinates) {
+        List<PathCoordinateDTO> dtoList = new ArrayList<>();
+        for (PathCoordinate path : pathCoordinates) {
+            dtoList.add(new PathCoordinateDTO(path.getLatitude(), path.getLongitude(), path.getAltitude()));
+        }
+        return dtoList;
+    }
+
+    // 경로 요청 처리
+    public List<PathCoordinateDTO> getRouteForInstance(int instanceId) {
         logger.info("getRouteForInstance called with instanceId: {}", instanceId);
 
-        List<PathCoordinate> routeSegment = droneRouteMap.get(instanceId);
+        List<PathCoordinateDTO> routeSegment = droneRouteMap.get(instanceId);
         if (routeSegment == null) {
             logger.error("드론 인스턴스 번호 {}에 대한 경로가 존재하지 않습니다.", instanceId);
             throw new IllegalArgumentException("드론 인스턴스 번호에 대한 경로가 존재하지 않습니다.");
@@ -183,5 +156,4 @@ public class DroneRouteService {
         logger.info("Returning route segment for instanceId {}: {}", instanceId, routeSegment);
         return routeSegment;
     }
-
 }

@@ -1,10 +1,8 @@
 package com.uam_control_system.controller;
 
-import com.uam_control_system.model.DroneInstance;
-import com.uam_control_system.model.PathCoordinate;
+import com.uam_control_system.dto.PathCoordinateDTO;
 import com.uam_control_system.service.DroneRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +20,11 @@ public class DroneRouteController {
     }
 
     @GetMapping("/uam/path/{instanceId}")
-    public List<PathCoordinate> getDroneRoute(@PathVariable int instanceId) {
+    public List<PathCoordinateDTO> getDroneRoute(@PathVariable int instanceId) {
         return droneRouteService.getRouteForInstance(instanceId);
     }
     @GetMapping("uam/drone/path/{instanceId}")
-    public List<PathCoordinate> getDronesRoutes(@PathVariable int instanceId) {
+    public List<PathCoordinateDTO> getDronesRoutes(@PathVariable int instanceId) {
         return droneRouteService.getRouteForInstance(instanceId);
     }
 }

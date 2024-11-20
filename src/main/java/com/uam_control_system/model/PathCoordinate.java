@@ -1,16 +1,36 @@
 package com.uam_control_system.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@Data
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PathCoordinate {
-    private double latitude; // 위도
-    private double longitude; // 경도
-    private double altitude; // 고도
 
-    public PathCoordinate(double latitude, double longitude, double altitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.altitude = altitude;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private double latitude;
+    private double longitude;
+    private double altitude;
+
+    @ManyToOne
+    @JoinColumn(name = "drone_route_id")
+    private DroneRoute droneRoute;
+
+    // DroneRoute로부터 PathCoordinate를 생성하는 생성자 추가
+    public PathCoordinate(DroneRoute droneRoute) {
+        this.latitude = droneRoute.getLatitude();
+        this.longitude = droneRoute.getLongitude();
+        this.altitude = droneRoute.getAltitude();
+        this.droneRoute = droneRoute;
     }
 }
