@@ -78,7 +78,6 @@ public class DroneRouteService {
         return final_route;
     }
 
-
     // 데이터베이스에서 전체 경로 가져오기
     private List<List<PathCoordinate>> getAllRoutes() {
         logger.info("Fetching all routes from database.");
@@ -87,11 +86,6 @@ public class DroneRouteService {
         List<DroneRoute> allRouteEntities = droneRouteRepository.findAll();
 
         // route_id별로 경로를 그룹화
-//        Map<Integer, List<PathCoordinate>> routeMap = new HashMap<>();
-//        for (DroneRoute entity : allRouteEntities) {
-//            routeMap.computeIfAbsent(entity.getRouteId(), k -> new ArrayList<>())
-//                    .add(new PathCoordinate(entity.getLatitude(), entity.getLongitude(), entity.getAltitude()));
-//        }
         Map<Integer, List<PathCoordinate>> routeMap = new HashMap<>();
         for (DroneRoute entity : allRouteEntities) {
             routeMap.computeIfAbsent(entity.getRouteId(), k -> new ArrayList<>())
@@ -101,7 +95,6 @@ public class DroneRouteService {
         // 그룹화된 경로를 List로 변환
         return new ArrayList<>(routeMap.values());
     }
-
 
     private List<PathCoordinate> findNearestRoute(List<List<PathCoordinate>> routes, Coordinate point) {
         double minDistance = Double.MAX_VALUE;
@@ -163,5 +156,4 @@ public class DroneRouteService {
         logger.info("Returning route segment for instanceId {}: {}", instanceId, routeSegment);
         return routeSegment;
     }
-
 }
