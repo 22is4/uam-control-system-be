@@ -33,15 +33,13 @@ public class CommandService {
                     command.getInstanceId(),
                     command.getLatitude(),
                     command.getLongitude(),
-                    0.0,  // 초기 고도
+                    0.0, // 초기 고도
                     0.0,
                     0.0,
                     0.0,
-                    0.0,  // 초기 속도
-                    "드론 생성 완료"
-            );
+                    0.0, // 초기 속도
+                    "드론 생성 완료");
             droneInstanceRepository.addDrone(createdDrone);
-//            droneService.sendToFrontend("create", createdDrone);
             logger.info("드론 생성 성공: {}", createdDrone);
             return createdDrone;
         }
@@ -56,7 +54,6 @@ public class CommandService {
             DroneInstance removedDrone = droneInstanceRepository.getDroneById(command.getInstanceId());
             if (removedDrone != null) {
                 droneInstanceRepository.removeDrone(command.getInstanceId());
-//                droneService.sendToFrontend("delete", command.getInstanceId());
                 logger.info("드론 삭제 성공: {}", command.getInstanceId());
                 return removedDrone;
             } else {
@@ -80,7 +77,6 @@ public class CommandService {
             droneInstance.setSpeed(coordinate.getSpeed());
             droneInstance.setStatus(coordinate.getStatus());
             logger.info("드론 위치 업데이트 완료: {}", droneInstance);
-//            droneService.sendToFrontend("update", droneInstance);
             return true;
         } else {
             logger.error("드론 인스턴스 없음: {}", coordinate.getInstanceId());
