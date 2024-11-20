@@ -17,6 +17,7 @@ public class PathCoordinate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private double latitude;
     private double longitude;
     private double altitude;
@@ -25,11 +26,11 @@ public class PathCoordinate {
     @JoinColumn(name = "drone_route_id")
     private DroneRoute droneRoute;
 
-    // 추가적인 생성자 (droneRoute를 포함하는 생성자)
-    public PathCoordinate(double latitude, double longitude, double altitude, DroneRoute droneRoute) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.altitude = altitude;
+    // DroneRoute로부터 PathCoordinate를 생성하는 생성자 추가
+    public PathCoordinate(DroneRoute droneRoute) {
+        this.latitude = droneRoute.getLatitude();
+        this.longitude = droneRoute.getLongitude();
+        this.altitude = droneRoute.getAltitude();
         this.droneRoute = droneRoute;
     }
 }

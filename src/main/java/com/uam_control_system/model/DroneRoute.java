@@ -1,31 +1,29 @@
 package com.uam_control_system.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.*;
-import java.util.List;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "drone_routes")
+@Data
 public class DroneRoute {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "droneRoute", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PathCoordinate> pathCoordinates;
+    @Column(name = "route_id", nullable = false)
+    private int routeId; // 경로 ID
 
-    private int instanceId;
+    @Column(name = "latitude", nullable = false)
+    private double latitude; // 위도
 
-    // 추가적인 생성자 (instanceId만 사용하는 생성자)
-    public DroneRoute(int instanceId) {
-        this.instanceId = instanceId;
-    }
+    @Column(name = "longitude", nullable = false)
+    private double longitude; // 경도
+
+    @Column(name = "altitude", nullable = false)
+    private int altitude; // 고도
+
+    @Column(name = "waypoint_order", nullable = false)
+    private int waypointOrder; // 경로 내 순서
 }
