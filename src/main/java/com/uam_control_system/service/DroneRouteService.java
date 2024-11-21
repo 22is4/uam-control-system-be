@@ -156,4 +156,36 @@ public class DroneRouteService {
         logger.info("Returning route segment for instanceId {}: {}", instanceId, routeSegment);
         return routeSegment;
     }
+
+    // 경로 ID별로 그룹화하여 전체 경로 반환
+    public Map<Integer, List<PathCoordinateDTO>> getRoutes() {
+        logger.info("Fetching and grouping all routes by routeId with waypointOrder sorting.");
+
+        // 데이터베이스에서 모든 DroneRoute 가져오기
+        List<DroneRoute> allRouteEntities = droneRouteRepository.findAll();
+
+        // routeId를 기준으로 그룹화
+        Map<Integer, List<DroneRoute>> groupedRoutes = new HashMap<>();
+        for (DroneRoute entity : allRouteEntities) {
+            groupedRoutes.computeIfAbsent(entity.getRouteId(), k -> new ArrayList<>()).add(entity);
+        }
+
+        // 각 그룹을 waypointOrder 기준으로 정렬
+        groupedRoutes.forEach((routeId, routeList) ->
+                routeList.sort(Comparator.comparingInt(DroneRoute::getWaypointOrder))
+        );
+
+        // DTO로 변환
+        Map<Integer, List<PathCoordinateDTO>> groupedRoutesDTO = new HashMap<>();
+        groupedRoutes.forEach((routeId, routeList) -> {
+            List<PathCoordinateDTO> dtoList = new ArrayList<>();
+            for (DroneRoute route : routeList) {
+                dtoList.add(new PathCoordinateDTO(route.getLatitude(), route.getLongitude(), route.getAltitude()));
+            }
+            groupedRoutesDTO.put(routeId, dtoList);
+        });
+
+        logger.info("Grouped and sorted routes successfully converted to DTO format.");
+        return groupedRoutesDTO;
+    }
 }
