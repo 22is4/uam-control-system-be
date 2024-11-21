@@ -22,7 +22,7 @@ public class DroneRoute {
     private double longitude; // 경도
 
     @Column(name = "altitude", nullable = false)
-    private int altitude; // 고도
+    private double altitude; // 고도
 
     @Column(name = "waypoint_order", nullable = false)
     private int waypointOrder; // 경로 내 순서
