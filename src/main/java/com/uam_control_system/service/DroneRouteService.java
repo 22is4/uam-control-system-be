@@ -101,14 +101,17 @@ public class DroneRouteService {
         List<PathCoordinate> nearestRoute = null;
 
         for (List<PathCoordinate> route : routes) {
-            double distance = calculateDistance(point, route.get(0));
-            if (distance < minDistance) {
-                minDistance = distance;
-                nearestRoute = route;
+            for (PathCoordinate pathCoordinate : route) {
+                double distance = calculateDistance(point, pathCoordinate);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestRoute = route;
+                }
             }
         }
         return nearestRoute;
     }
+
 
     private int findClosestCoordinateIndex(Coordinate point, List<PathCoordinate> route) {
         logger.info("findClosestCoordinateIndex called with point: {}", point);
